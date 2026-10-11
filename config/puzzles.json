@@ -1,0 +1,22 @@
+[
+  {
+    "id": "civil-building",
+    "location_name": "Civil Department",
+    "location_aliases": ["civil building", "civil department", "front gate"],
+    "difficulty": "easy",
+    "ace_time_ms": 30000,
+    "par_time_ms": 90000,
+    "max_score": 1000,
+    "image_filename": "civil-building.jpg"
+  },
+  {
+    "id": "central-library",
+    "location_name": "Central Library",
+    "location_aliases": ["admin block", "admin building", "administrative block"],
+    "difficulty": "medium",
+    "ace_time_ms": 60000,
+    "par_time_ms": 180000,
+    "max_score": 1000,
+    "image_filename": "central-library.jpg"
+  }
+]
