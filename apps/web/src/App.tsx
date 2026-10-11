@@ -4,6 +4,7 @@ import PuzzleList from "./pages/PuzzleList";
 import Game from "./pages/Game";
 import DoubleOrNothing from "./pages/DoubleOrNothing";
 import Results from "./pages/Results";
+import Leaderboard from "./pages/Leaderboard";
 import { clearPlayer, getStoredPlayer } from "./lib/session";
 
 /** Players without a stored profile are sent to /register. */
@@ -28,6 +29,16 @@ function Layout() {
           <Link to="/puzzles" className="text-lg font-bold tracking-tight">
             Campus Unjumbled
           </Link>
+          {player && (
+            <nav className="flex items-center gap-4 text-sm">
+              <Link to="/puzzles" className="hover:underline">
+                Puzzles
+              </Link>
+              <Link to="/leaderboard" className="hover:underline">
+                Leaderboard
+              </Link>
+            </nav>
+          )}
           {player && (
             <div className="flex items-center gap-3 text-sm">
               <span className="text-stone-600 dark:text-stone-400">
@@ -59,7 +70,8 @@ export default function App() {
             <Route path="/game/:puzzleId" element={<Game />} />
             <Route path="/gamble" element={<DoubleOrNothing />} />
             <Route path="/results" element={<Results />} />
-            {/* Task 2.4 adds /leaderboard, Task 3.2 /stats, Task 3.3 /admin */}
+            <Route path="/leaderboard" element={<Leaderboard />} />
+            {/* Task 3.2 adds /stats, Task 3.3 /admin */}
           </Route>
           <Route path="*" element={<Navigate to="/puzzles" replace />} />
         </Route>

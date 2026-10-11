@@ -3,6 +3,7 @@ import type {
   Difficulty,
   EndAttemptResult,
   GambleResult,
+  LeaderboardRow,
   PlayerBadgeRow,
   PuzzleSummary,
   StoredPlayer,
@@ -88,3 +89,16 @@ export const submitGamble = (attemptId: string, choice: "accepted" | "rejected",
 // ---- Badges ----
 export const getPlayerBadges = (playerId: string) =>
   request<PlayerBadgeRow[]>(`/badges/player/${playerId}`);
+
+// ---- Leaderboards ----
+const withParams = (path: string, branch?: Branch | "", limit = 50) => {
+  const q = new URLSearchParams({ limit: String(limit) });
+  if (branch) q.set("branch", branch);
+  return `${path}?${q.toString()}`;
+};
+
+export const getPuzzleLeaderboard = (puzzleId: string, branch?: Branch | "") =>
+  request<LeaderboardRow[]>(withParams(`/leaderboard/puzzle/${puzzleId}`, branch));
+
+export const getGlobalLeaderboard = (branch?: Branch | "") =>
+  request<LeaderboardRow[]>(withParams("/leaderboard/global", branch));

@@ -73,3 +73,14 @@ export interface ResultsState extends GambleState {
 }
 
 export const GRID_SIZE: Record<Difficulty, number> = { easy: 3, medium: 4, hard: 5 };
+
+/** One row of GET /leaderboard/puzzle/:id or /leaderboard/global. */
+export interface LeaderboardRow {
+  rank: number;
+  player_id?: string; // used to highlight the current player when the API sends it
+  player_name: string;
+  branch: Branch;
+  score: number;
+  duration_ms?: number | null; // per-puzzle board only
+  move_count?: number | null; // per-puzzle board only
+}

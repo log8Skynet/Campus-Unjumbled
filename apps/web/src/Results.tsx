@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, Navigate, useLocation } from "react-router-dom";
 import { getPlayerBadges } from "../api/client";
+import BadgeCard from "../components/BadgeCard";
 import { BADGES, type BadgeInfo } from "../lib/badges";
 import { formatDuration, TIER_LABELS } from "../lib/format";
 import { getStoredPlayer } from "../lib/session";
@@ -85,16 +86,8 @@ export default function Results() {
         <section className="mt-8 text-left" aria-label="New badges">
           <h2 className="text-lg font-semibold">New badges</h2>
           <ul className="mt-2 space-y-2">
-            {newBadges.map((b) => (
-              <li key={b.id} className="flex items-center gap-3 rounded-md bg-amber-50 p-3 dark:bg-amber-950/30">
-                <span className="text-2xl" aria-hidden>
-                  {b.icon}
-                </span>
-                <span>
-                  <span className="block font-semibold">{b.name}</span>
-                  <span className="block text-sm text-stone-600 dark:text-stone-400">{b.description}</span>
-                </span>
-              </li>
+            {newBadges.map((b, i) => (
+              <BadgeCard key={b.id} badge={b} delayMs={i * 150} />
             ))}
           </ul>
         </section>
@@ -108,7 +101,7 @@ export default function Results() {
           Play another
         </Link>
         <Link
-          to="/leaderboard"
+          to={`/leaderboard?tab=puzzle&puzzle=${state.puzzleId}`}
           className="rounded-md border border-stone-300 px-4 py-2.5 font-semibold hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-800"
         >
           View leaderboard
